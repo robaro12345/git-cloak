@@ -1,37 +1,32 @@
-name: Random Edits Bot
+name: Random File Operations Bot
 
 on:
   schedule:
-    - cron: "* * * * *"  
+    - cron: "*/10 * * * *"  
   workflow_dispatch:
 
 permissions:
-  contents: write  
+  contents: write
 
 jobs:
-  automate-edits:
+  modify-files:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false  
-
+        
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
-
-      - name: Install dependencies
-        run: pip install gitpython
-
-      - name: Run Python script
-        run: python random_edits.py
-
-      - name: Commit and push changes
+          python-version: '3.10'
+          
+      - name: Run file operations script
+        run: python file_operations.py
+        
+      - name: Commit and push if there are changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Automated commit: $(date)" || echo "No changes to commit"
-          git push
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          
+          git diff --cached --quiet || (git commit -m "Auto file operation: $(date)" && git push)
