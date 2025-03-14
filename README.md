@@ -1,2 +1,2 @@
 # git-cloak
-Creates a false heatmap on github profile
+dubito ergo cogni, cogni ergo sum
