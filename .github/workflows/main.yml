@@ -20,6 +20,9 @@ jobs:
         with:
           python-version: '3.10'
           
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
       - name: Run file operations script
         run: python file_operations.py
         
@@ -28,5 +31,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          
-          git diff --cached --quiet || (git commit -m "Auto file operation: $(date)" && git push)
+          git diff --cached --quiet || (git commit -m "Auto file operation: $(date)" && git pull --rebase && git push)
