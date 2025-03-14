@@ -1,8 +1,9 @@
 name: Random Edits Bot
+
 on:
   schedule:
     - cron: "* * * * *"  
-  workflow_dispatch:  ng
+  workflow_dispatch:
 
 permissions:
   contents: write  
