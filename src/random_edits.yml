@@ -1,7 +1,8 @@
 name: Random Edits Bot
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "* * * * *"
+
   workflow_dispatch: 
 
 jobs:
